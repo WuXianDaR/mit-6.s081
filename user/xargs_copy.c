@@ -12,7 +12,6 @@ char* readline(){
 		if(c == '\n'){
 			break;
 		}else{
-			printf("c:%c ",c);
 			buf[++pos] = c;
 		}
 	}
@@ -30,7 +29,6 @@ int main(int argc, char *argv[]){
 		fprintf(2, "Usage : xargs command args...\n");
 		exit(1);
 	}
-
 	char *argv_new[MAXARG];
 	for(int i = 1; i < argc; i++){
 		argv_new[i-1] = argv[i];
@@ -38,12 +36,7 @@ int main(int argc, char *argv[]){
 	char *r;
 	while((r = readline()) != NULL){
 		argv_new[argc-1] = r;
-			
 		if(fork() == 0){
-			
-		printf("\nr is :%s\n",r);
-
-		printf("argv_new[0] is : %s \n",argv_new[0]);
 			exec(argv_new[0], argv_new);
 			free(r);
 			exit(0);
